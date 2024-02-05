@@ -1,6 +1,6 @@
+from cascade import cascade
 import discord
 import os
-import random
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -15,14 +15,11 @@ tree = discord.app_commands.CommandTree(client)
     guild=discord.Object(id=os.getenv('DISCORD_SERVER'))
 )
 async def slash_command(interaction, arg: str):
-    if interaction.message.author.bot:
+    if interaction.user.bot:
         return
+    print(interaction.user.display_name, arg)
 
-    # select joke
-    f = open("lines.txt", "r")
-    jokes = f.readlines()
-    joke = random.choice(jokes).replace('#', arg)
-
+    cascade(arg)
     await interaction.response.send_message(joke)
 
 @client.event

@@ -31,7 +31,8 @@ async def on_ready():
     # server = list(filter(lambda x: x.id == os.getenv('DISCORD_SERVER'), client.guilds))[0]
     server = client.get_guild(int(os.getenv('DISCORD_SERVER')))
     for member in server.members:
-        confluence.create_confluence_page_if_not_exists(str(member), server.name)
+        pfpurl = member.avatar.url
+        confluence.create_confluence_page_if_not_exists(page_title=str(member), server_name=server.name, img_url=pfpurl)
         time.sleep(3)
 
     

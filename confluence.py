@@ -13,11 +13,11 @@ HEADERS = {
     'Content-Type': 'application/json;charset=iso-8859-1',
 }
 
-def create_confluence_page_if_not_exists(page_title: str, server_name: str):
+def create_confluence_page_if_not_exists(page_title: str, server_name: str, img_url: str):
     # todo: Check if page exists
     
     # Set the title and content of the page to create
-    page_html = f'<p>{page_title} is a member of the {server_name} discord server.</p>'
+    page_html = f'<img src="{img_url}" alt="Discord profile picture of {page_title}"><br><p>{page_title} is a member of the {server_name} discord server.</p>'
 
     # Request body
     data = {
@@ -32,6 +32,7 @@ def create_confluence_page_if_not_exists(page_title: str, server_name: str):
             }
         }
     }
+    print(json.dumps(data))
 
     # We're ready to call the api
     try:

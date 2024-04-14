@@ -162,3 +162,5 @@ cython_debug/
 #.idea/
 
 lines.txt
+trolley_advanced.txt
+trolley_base.txt

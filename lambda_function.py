@@ -1,6 +1,7 @@
 import json
 
 from cascade import cascade
+from factorfiction import factorfiction
 
 from nacl.signing import VerifyKey
 from nacl.exceptions import BadSignatureError
@@ -52,13 +53,21 @@ def lambda_handler(event, context):
 
 def command_handler(body):
   command = body['data']['name']
-  arg = body['data']['options'][0]['value']
-  print(body['member']['user']['global_name'], arg)
   if command == 'cascade':
+    arg = body['data']['options'][0]['value']
+    print(body['member']['user']['global_name'], arg)
     return json.dumps({
       'type': 4,
       'data': {
         'content': cascade(arg),
+      }
+    })
+  elif command == 'factorfiction':
+    extra = body['data']['options'][0]['value'] if 'options' in body['data'] else None
+    return json.dumps({
+      'type': 4,
+      'data': {
+        'content': factorfiction(extra),
       }
     })
   else:

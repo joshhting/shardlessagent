@@ -34,6 +34,4 @@ async def on_ready():
         confluence.create_confluence_page_if_not_exists(str(member), server.name)
         time.sleep(3)
 
-    
-
 client.run(os.getenv('DISCORD_TOKEN'))

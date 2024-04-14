@@ -15,16 +15,30 @@ BOT_TOKEN = os.getenv('DISCORD_TOKEN')
 # they're much better for testing
 url = f'https://discord.com/api/v10/applications/{APP_ID}/guilds/{SERVER_ID}/commands'
 
+# json = [
+#   {
+#     'name': 'cascade',
+#     'description': 'Cascade into a random joke',
+#     'options': [
+#         {
+#             "name": "arg",
+#             "description": "Subject matter",
+#             "type": 3,
+#             "required": True
+#         }
+#     ]
+#   }
+# ]
 json = [
   {
-    'name': 'cascade',
-    'description': 'Cascade into a random joke',
+    'name': 'factorfiction',
+    'description': 'Generate a trolley problem',
     'options': [
         {
-            "name": "arg",
-            "description": "Subject matter",
-            "type": 3,
-            "required": True
+            'name': 'meme',
+            'description': '"Enabled" to allow for meme options',
+            'type': 3,
+            'required': False
         }
     ]
   }

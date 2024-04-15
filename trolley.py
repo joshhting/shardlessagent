@@ -12,8 +12,8 @@ class TrolleyProblem():
             f = open("trolley_advanced.txt", "r")
             subjects += f.readlines()
 
-        track1Num = random.randint(1, 3)
-        track2Num = random.randint(1, 3)
+        track1Num = random.randint(1, 5)
+        track2Num = random.randint(1, 5)
         sample = random.sample(subjects, track1Num + track2Num)
         self.track1 = list(map(lambda n: n.replace('\n', ''), sample[:track1Num]))
         self.track2 = list(map(lambda n: n.replace('\n', ''), sample[track1Num:]))

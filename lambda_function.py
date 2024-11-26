@@ -2,6 +2,7 @@ import json
 
 from cascade import cascade
 from factorfiction import factorfiction
+from lottery import draw_lottery, plus_1, minus_1, view_entries
 
 from nacl.signing import VerifyKey
 from nacl.exceptions import BadSignatureError
@@ -70,7 +71,39 @@ def command_handler(body):
         'content': factorfiction(extra),
       }
     })
-  else:
+  elif command == 'drawLottery':
+    return json.dumps({
+      'type': 4,
+      'data': {
+        'content': draw_lottery(),
+      }
+    })
+  elif command == 'listLotteryEntries':
+    return json.dumps({
+      'type': 4,
+      'data': {
+        'content': view_entries(),
+      }
+    })
+  elif command == 'plus1Lottery':
+    arg = body['data']['options'][0]['value']
+    print(body['member']['user']['global_name'], arg)
+    return json.dumps({
+      'type': 4,
+      'data': {
+        'content': plus_1(arg),
+      }
+    })
+  elif command == 'minus1Lottery':
+    arg = body['data']['options'][0]['value']
+    print(body['member']['user']['global_name'], arg)
+    return json.dumps({
+      'type': 4,
+      'data': {
+        'content': minus_1(arg),
+      }
+    })
+else:
     return {
       'statusCode': 400,
       'body': json.dumps('unhandled command')

@@ -1,42 +1,21 @@
 import random
-
-FILENAME = "people.txt"
+from dynamo import delete_db_item, add_db_item, get_all_items
 
 def draw_lottery(rigged = False):
     if rigged:
         return "The winner is: Yo mama!"
-    with open(FILENAME) as file:
-        people = [line.strip() for line in file]
+    people = [person['name'].strip() for person in get_all_items()]
     ret = random.choice(people)
     return "The winner is: " + ret + "!"
 
 def view_entries():
-    ret = "All contestants:\n"
-    with open(FILENAME) as file:
-        people = [line for line in file]
-    for p in people:
-        ret += p
+    ret = "All contestants:\n" + "\n".join(person['name'] for person in get_all_items())
     return ret
 
 def plus_1(entry):
-    with open(FILENAME) as file:
-        people = [line for line in file]
-    people.append(entry + "\n")
-    people.sort()
-    txt = ""
-    for p in people:
-        txt += p
-    with open(FILENAME, "w") as file:
-        file.write(txt)
+    add_db_item(entry)
     return "Added " + entry + " to the list."
 
 def minus_1(entry):
-    with open(FILENAME) as file:
-        people = [line.strip() for line in file]
-    people.remove(entry)
-    txt = ""
-    for p in people:
-        txt += p + "\n"
-    with open(FILENAME, "w") as file:
-        file.write(txt[:-1])
+    delete_db_item(entry)
     return "Removed " + entry + " from the list."

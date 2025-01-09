@@ -1,4 +1,8 @@
 # shardlessagent
+Functions:
+* Automate bits
+* Trolley problem
+* Lottery utility
 
 ## Build Instructions
 1. Create a `.env` file with DISCORD_TOKEN and DISCORD_SERVER values.

@@ -3,6 +3,7 @@ import json
 from cascade import cascade
 from factorfiction import factorfiction
 from lottery import draw_lottery, plus_1, minus_1, view_entries
+from replicate import get_last_replicate_datetime
 
 from nacl.signing import VerifyKey
 from nacl.exceptions import BadSignatureError
@@ -62,6 +63,20 @@ def command_handler(body):
 			'type': 4,
 			'data': {
 				'content': cascade(arg),
+			}
+		})
+	elif command == 'replicate':
+		if body['member']['user']['global_name'].lower() != "kingting":
+			return json.dumps({
+				'type': 4,
+				'data': {
+					'content': "You don't have permission to use this command."
+				}
+			})
+		return json.dumps({
+			'type': 4,
+			'data': {
+				'content': get_last_replicate_datetime(),
 			}
 		})
 	elif command == 'factorfiction':

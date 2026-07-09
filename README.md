@@ -3,6 +3,7 @@ Functions:
 * Automate bits
 * Trolley problem
 * Lottery utility
+* Days since last accident counter
 
 ## Build Instructions
 ### Running the bot locally

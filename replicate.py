@@ -19,7 +19,7 @@ def get_last_replicate_datetime():
 
 		# Use a content search for a distinctive phrase from the bot output.
 		query = urllib.parse.urlencode({
-			'content': "It has now been 0 days since Josh Ting and Nelson Chen were confused for one another. The previous record was 13 days.",
+			'content': search_str,
 			# 'author_type': 'bot',
 			'limit': 25
 		})
@@ -51,5 +51,6 @@ def get_last_replicate_datetime():
 			latest = latest.replace(tzinfo=datetime.timezone.utc)
 		age = (now - latest).days
 		return f"{search_str}{age} days."
-	except Exception:
+	except Exception as e:
+		print(e)
 		return None
